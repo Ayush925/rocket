@@ -1,0 +1,52 @@
+clear()
+drawStage(ColorMaker.black)
+val pic1 = Picture {
+    setFillColor(yellow)
+    setPenColor(yellow)
+    repeat(360) {
+        forward(1)
+        right(1)
+    }
+}
+pic1.translate(-115 / 2, 0)
+draw(pic1)
+val cb = canvasBounds
+val x = 1
+val pic = Picture {
+    setFillColor(red)
+    repeat(4) {
+      circle(10)
+    }
+}
+pic.setPosition(cb.x + 400, cb.y + 400)
+
+var vel1 = Vector2D(2, 2)
+var vel2 = Vector2D(1, 1)
+var v = vel2 + vel1
+
+draw(pic)
+
+animate {
+    pic.translate(-32,-32)
+    pic.rotate(20)
+
+    if (isKeyPressed(Kc.VK_RIGHT)) {
+        pic.rotate(-3.1)
+    }
+    if (isKeyPressed(Kc.VK_LEFT)) {
+        pic.rotate(2)
+    }
+    if (isKeyPressed(Kc.VK_UP)) {
+        pic.translate(v)
+    }
+    if (pic.collidesWith(pic1)) {
+        stopAnimation()
+        
+    }
+    if (pic.collidesWith(stageBorder)) {
+        stopAnimation()
+       
+    }
+}
+
+activateCanvas()
